@@ -226,4 +226,4 @@ This project is for educational purposes as part of a AI Assisted Development ho
 
 ## Author
 
-Created as part of a Django development course homework.
+Created as part of an AI Assisted Development course homework.
