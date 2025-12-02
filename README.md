@@ -222,7 +222,7 @@ This project was built as part of a Django homework assignment. Here are the ans
 
 ## License
 
-This project is for educational purposes as part of a Django homework assignment.
+This project is for educational purposes as part of a AI Assisted Development homework assignment.
 
 ## Author
 
