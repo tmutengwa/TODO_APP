@@ -1,0 +1,55 @@
+{% extends 'todos/base.html' %}
+
+{% block title %}Home - TODO App{% endblock %}
+
+{% block content %}
+    <h2>My TODOs</h2>
+    <a href="{% url 'create_todo' %}" class="btn btn-primary">Create New TODO</a>
+
+    <div style="margin-top: 20px;">
+        {% if todos %}
+            {% for todo in todos %}
+                <div style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px; {% if todo.resolved %}background-color: #d4edda;{% endif %}">
+                    <h3 style="margin-top: 0;">
+                        {% if todo.resolved %}
+                            <s>{{ todo.title }}</s>
+                        {% else %}
+                            {{ todo.title }}
+                        {% endif %}
+                    </h3>
+
+                    {% if todo.description %}
+                        <p>{{ todo.description }}</p>
+                    {% endif %}
+
+                    {% if todo.due_date %}
+                        <p><strong>Due Date:</strong> {{ todo.due_date }}</p>
+                    {% endif %}
+
+                    <p><strong>Status:</strong>
+                        {% if todo.resolved %}
+                            <span style="color: green;">Resolved</span>
+                        {% else %}
+                            <span style="color: orange;">Pending</span>
+                        {% endif %}
+                    </p>
+
+                    <div>
+                        <a href="{% url 'edit_todo' todo.id %}" class="btn btn-secondary">Edit</a>
+                        <a href="{% url 'delete_todo' todo.id %}" class="btn btn-danger">Delete</a>
+                        <form method="post" action="{% url 'toggle_resolved' todo.id %}" style="display: inline;">
+                            {% csrf_token %}
+                            {% if todo.resolved %}
+                                <button type="submit" class="btn btn-secondary">Mark as Pending</button>
+                            {% else %}
+                                <button type="submit" class="btn btn-success">Mark as Resolved</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="margin-top: 20px;">No TODOs yet. Create your first one!</p>
+        {% endif %}
+    </div>
+{% endblock %}
